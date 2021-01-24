@@ -1,16 +1,21 @@
-const mongoose = require('mongoose')
 require('dotenv').config()
+const mysql = require('mysql')
 
-const { DB_URL } = process.env
-mongoose.connect(`mongodb://${DB_URL}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+const config = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+}
+const connection = mysql.createPool(config)
+
+connection.getConnection((err, connection) => {
+  if (err) {
+    console.error(err)
+  } else {
+    console.log('Database connected')
+  }
 })
 
-const db = mongoose.connection
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', function () {
-  console.log(`Connected to database`)
-})
-
-module.exports = db
+module.exports = connection
