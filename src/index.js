@@ -10,7 +10,7 @@ app.use(
   })
 )
 
-routes(app)
+app.use('/', routes)
 
 const { SERVER_PORT } = process.env
 
