@@ -1,4 +1,4 @@
-# Boilerplate : Node/Express/Mongoose
+# Boilerplate : Node/Express/MySQL
 
 ## Start
 
